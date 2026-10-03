@@ -4,7 +4,7 @@
 // Note that when running locally, in order to open a web page which uses modules, you must serve the directory over HTTP e.g. with https://www.npmjs.com/package/http-server
 // You can't open the index.html file using a file:// URL.
 
-import { getUserIds, getData } from "./storage.js";
+import { getUserIds, getData, setData } from "./storage.js";
 
 const state = {
   users: [],
@@ -29,7 +29,7 @@ window.onload = function () {
   state.users = getUserIds();
   createUserOptions();
   elements.userSelect.addEventListener("change", handleUserSelection);
-  //elements.bookmarkForm.addEventListener("submit", handleAddBookmarkSubmit);
+  elements.bookmarkForm.addEventListener("submit", handleAddBookmarkSubmit);
   //elements.bookmarkClear.addEventListener("click", handleClearBookmark);
 };
 
@@ -69,5 +69,34 @@ function render() {
     elements.bookmarkContainer.textContent =
       "There is currently no stored bookmark data for this user.";
   } else {
+    
   }
+}
+
+// Handle bookmark form
+function handleAddBookmarkSubmit(event) {
+  event.preventDefault();
+
+  const userId = state.selectedUser;
+  alert(`Adding bookmark for user: ${userId}`);
+
+  const url = document.querySelector("#url").value;
+  const title = document.querySelector("#title").value;
+  const description = document.querySelector("#description").value;
+
+  const newBookmark = {
+    url: url,
+    title: title,
+    description: description,
+    createdAt: new Date().toISOString(),
+    likes: 0,
+  };
+
+  state.bookmarks.push(newBookmark);
+
+  setData(userId, state.bookmarks);
+
+  elements.bookmarkForm.reset();
+
+  render();
 }
