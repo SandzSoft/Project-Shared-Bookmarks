@@ -4,7 +4,7 @@
 // Note that when running locally, in order to open a web page which uses modules, you must serve the directory over HTTP e.g. with https://www.npmjs.com/package/http-server
 // You can't open the index.html file using a file:// URL.
 
-import { getUserIds } from "./storage.js";
+import { getUserIds, getData } from "./storage.js";
 
 const state = {
   users: [],
@@ -28,7 +28,7 @@ window.onload = function () {
 
   state.users = getUserIds();
   createUserOptions();
-  //elements.userSelect.addEventListener("change", handleUserSelection);
+  elements.userSelect.addEventListener("change", handleUserSelection);
   //elements.bookmarkForm.addEventListener("submit", handleAddBookmarkSubmit);
   //elements.bookmarkClear.addEventListener("click", handleClearBookmark);
 };
@@ -44,4 +44,30 @@ function createUserOptions() {
     option.textContent = user;
     elements.userSelect.appendChild(option);
   });
+}
+
+function handleUserSelection(event) {
+  state.selectedUser = event.target.value;
+
+  if (state.selectedUser === "") {
+    state.selectedUser = null;
+    elements.bookmarkAdd.style.display = "none";
+    state.bookmarks = [];
+    render();
+    return;
+  }
+
+  elements.bookmarkAdd.style.display = "block";
+  state.bookmarks = getData(state.selectedUser);
+  render();
+}
+
+function render() {
+  if (state.bookmarks === null) {
+    alert("No bookmark data found for this user.");
+    state.bookmarks = [];
+    elements.bookmarkContainer.textContent =
+      "There is currently no stored bookmark data for this user.";
+  } else {
+  }
 }
