@@ -15,22 +15,33 @@ const state = {
 const elements = {};
 
 window.onload = function () {
-  elements.userSelect = document.getElementById("user-selector");
-  elements.bookmarkCards = document.getElementById("bookmark-cards");
+  elements.userSelect = document.getElementById("user-select");
+  elements.bookmarkContainer = document.getElementById("bookmarks-container");
   elements.bookmarkForm = document.getElementById("bookmark-form");
   elements.bookmarkAdd = document.getElementById("add-bookmark");
-  elements.bookmarkClear = document.getElementById("bookmark-clear");
+  //elements.bookmarkClear = document.getElementById("bookmark-clear");
 
-  elements.bookmarkTitle = document.getElementById("bookmark-title");
-  elements.bookmarkUrl = document.getElementById("bookmark-url");
-  elements.bookmarkDescription = document.getElementById(
-    "bookmark-description",
-  );
+  elements.bookmarkTitle = document.getElementById("title");
+  elements.bookmarkUrl = document.getElementById("url");
+  elements.bookmarkDescription = document.getElementById("description");
   elements.bookmarkAdd.style.display = "none";
 
   state.users = getUserIds();
   createUserOptions();
-  elements.userSelect.addEventListener("change", handleUserSelection);
-  elements.bookmarkForm.addEventListener("submit", handleAddBookmarkSubmit);
-  elements.bookmarkClear.addEventListener("click", handleClearBookmark);
+  //elements.userSelect.addEventListener("change", handleUserSelection);
+  //elements.bookmarkForm.addEventListener("submit", handleAddBookmarkSubmit);
+  //elements.bookmarkClear.addEventListener("click", handleClearBookmark);
 };
+
+function createUserOptions() {
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "";
+  defaultOption.textContent = "---Select User---";
+  elements.userSelect.appendChild(defaultOption);
+  state.users.forEach((user) => {
+    const option = document.createElement("option");
+    option.value = user;
+    option.textContent = user;
+    elements.userSelect.appendChild(option);
+  });
+}
