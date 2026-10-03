@@ -14,50 +14,47 @@
 
   <body>
     <main>
-<h1>Shared Bookmarks</h1>
+      <h1>Shared Bookmarks</h1>
 
-    <!-- User Selection -->
-    <section>
-      <label for="user-select">Select User</label>
+      <!-- User Selection -->
+      <section>
+        <label for="user-select">Select User</label>
 
-      <select id="user-select">
-        <option value="">Select a user</option>
-      </select>
-    </section>
+        <select id="user-select"></select>
+      </section>
 
-    <!-- Bookmarks -->
-    <section>
-      <h2>Bookmarks</h2>
+      <!-- Bookmarks -->
+      <section>
+        <h2>Bookmarks</h2>
 
-      <p id="message">Please select a user to view bookmarks.</p>
+        <!--<p id="message">Please select a user to view bookmarks.</p>-->
 
-      <div id="bookmarks-container"></div>
-    </section>
+        <div id="bookmarks-container"></div>
+      </section>
 
-    <!-- Add Bookmark Form -->
-    <section id="bookmark-add">
-      <h2>Add Bookmark</h2>
+      <!-- Add Bookmark Form -->
+      <section id="add-bookmark">
+        <h2>Add Bookmark</h2>
 
-      <form id="bookmark-form">
-        <div>
-          <label for="url">URL</label>
-          <input type="url" id="url" name="url" required />
-        </div>
+        <form id="bookmark-form">
+          <div>
+            <label for="url">URL</label>
+            <input type="url" id="url" name="url" required />
+          </div>
 
-        <div>
-          <label for="title">Title</label>
-          <input type="text" id="title" name="title" required />
-        </div>
+          <div>
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" required />
+          </div>
 
-        <div>
-          <label for="description">Description</label>
-          <textarea id="description" name="description" required></textarea>
-        </div>
+          <div>
+            <label for="description">Description</label>
+            <textarea id="description" name="description" required></textarea>
+          </div>
 
-        <button type="submit">Add Bookmark</button>
-      </form>
-    </section>
+          <button type="submit">Add Bookmark</button>
+        </form>
+      </section>
     </main>
-  
   </body>
 </html>
