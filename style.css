@@ -1,0 +1,93 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  background-color: #f5f7fa;
+  color: #333;
+}
+
+/* Main heading */
+h1 {
+  text-align: center;
+  margin-bottom: 35px;
+  color: #016937;
+}
+
+section {
+  background-color: white;
+  padding: 25px;
+  margin-bottom: 25px;
+  border-radius: 12px;
+  border: 1px solid #e1e5ea;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+/* Section headings */
+h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #016937;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+/* Labels */
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #016937;
+}
+
+/* Select input and textarea */
+select,
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 18px;
+  border: 1px solid #c2af01;
+  border-radius: 7px;
+  font-size: 15px;
+  background-color: #fff;
+}
+
+textarea {
+  min-height: 120px;
+}
+
+/* Buttons */
+button {
+  padding: 11px 18px;
+  border: none;
+  border-radius: 7px;
+  background-color: #333;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #04975e;
+}
+
+/* Bookmarks area */
+#bookmarks-container {
+  min-height: 100px;
+}
+
+/* Placeholder message */
+#message {
+  text-align: center;
+  font-style: italic;
+  color: #777;
+  padding: 30px 10px;
+  margin: 0;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
