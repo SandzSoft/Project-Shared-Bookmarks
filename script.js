@@ -6,7 +6,31 @@
 
 import { getUserIds } from "./storage.js";
 
-/*window.onload = function () {
-  const users = getUserIds();
-  document.querySelector("body").innerText = `There are ${users.length} users`;
-};*/
+const state = {
+  users: [],
+  selectedUser: null,
+  bookmarks: [],
+};
+
+const elements = {};
+
+window.onload = function () {
+  elements.userSelect = document.getElementById("user-selector");
+  elements.bookmarkCards = document.getElementById("bookmark-cards");
+  elements.bookmarkForm = document.getElementById("bookmark-form");
+  elements.bookmarkAdd = document.getElementById("add-bookmark");
+  elements.bookmarkClear = document.getElementById("bookmark-clear");
+
+  elements.bookmarkTitle = document.getElementById("bookmark-title");
+  elements.bookmarkUrl = document.getElementById("bookmark-url");
+  elements.bookmarkDescription = document.getElementById(
+    "bookmark-description",
+  );
+  elements.bookmarkAdd.style.display = "none";
+
+  state.users = getUserIds();
+  createUserOptions();
+  elements.userSelect.addEventListener("change", handleUserSelection);
+  elements.bookmarkForm.addEventListener("submit", handleAddBookmarkSubmit);
+  elements.bookmarkClear.addEventListener("click", handleClearBookmark);
+};
