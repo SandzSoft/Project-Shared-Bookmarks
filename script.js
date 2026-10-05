@@ -1,11 +1,7 @@
-// This is a placeholder file which shows how you can access functions defined in other files.
-// It can be loaded into index.html.
-// You can delete the contents of the file once you have understood how it works.
-// Note that when running locally, in order to open a web page which uses modules, you must serve the directory over HTTP e.g. with https://www.npmjs.com/package/http-server
-// You can't open the index.html file using a file:// URL.
-
 import { getUserIds, getData, setData } from "./storage.js";
+import { increaseLikes, getUserOptions, sortBookmarks } from "./functions.js";
 
+//state object to hold the application state
 const state = {
   users: [],
   selectedUser: null,
@@ -14,6 +10,7 @@ const state = {
 
 const elements = {};
 
+//window onload event to initialize the application
 window.onload = function () {
   elements.userSelect = document.getElementById("user-select");
   elements.bookmarkContainer = document.getElementById("bookmarks-container");
@@ -33,19 +30,21 @@ window.onload = function () {
   //elements.bookmarkClear.addEventListener("click", handleClearBookmark);
 };
 
+// Create user options in the select dropdown
 function createUserOptions() {
   const defaultOption = document.createElement("option");
   defaultOption.value = "";
   defaultOption.textContent = "---Select User---";
   elements.userSelect.appendChild(defaultOption);
-  state.users.forEach((user) => {
+  getUserOptions(state.users).forEach((userOption) => {
     const option = document.createElement("option");
-    option.value = user;
-    option.textContent = user;
+    option.value = userOption.value;
+    option.textContent = userOption.text;
     elements.userSelect.appendChild(option);
   });
 }
 
+// Handle user selection from the dropdown
 function handleUserSelection(event) {
   state.selectedUser = event.target.value;
 
@@ -62,41 +61,30 @@ function handleUserSelection(event) {
   render();
 }
 
+// Render bookmarks in the container
 function render() {
   if (state.bookmarks === null) {
-    alert("No bookmark data found for this user.");
-    state.bookmarks = [];
     elements.bookmarkContainer.textContent =
       "There is currently no stored bookmark data for this user.";
   } else {
-    
   }
 }
 
 // Handle bookmark form
 function handleAddBookmarkSubmit(event) {
   event.preventDefault();
-
-  const userId = state.selectedUser;
-  alert(`Adding bookmark for user: ${userId}`);
-
-  const url = document.querySelector("#url").value;
-  const title = document.querySelector("#title").value;
-  const description = document.querySelector("#description").value;
-
-  const newBookmark = {
-    url: url,
-    title: title,
-    description: description,
+  const data = {
+    title: elements.bookmarkTitle.value,
+    url: elements.bookmarkUrl.value,
+    description: elements.bookmarkDescription.value,
     createdAt: new Date().toISOString(),
     likes: 0,
   };
-
-  state.bookmarks.push(newBookmark);
-
-  setData(userId, state.bookmarks);
-
+  if (state.bookmarks === null) {
+    state.bookmarks = [];
+  }
+  state.bookmarks.push(data);
+  setData(state.selectedUser, state.bookmarks);
   elements.bookmarkForm.reset();
-
   render();
 }
