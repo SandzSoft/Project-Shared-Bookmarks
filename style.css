@@ -91,3 +91,16 @@ button:hover {
   background-color: #f8f9fa;
   border-radius: 8px;
 }
+
+article {
+border: 1px solid #E1E5EA;
+border-radius: 12px;
+padding: 20px;
+margin-bottom: 15px;
+background: white;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+article button {
+margin-right: 10px;
+}
