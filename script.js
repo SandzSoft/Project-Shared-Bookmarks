@@ -47,12 +47,11 @@ function createUserOptions() {
 // Handle user selection from the dropdown
 function handleUserSelection(event) {
   state.selectedUser = event.target.value;
-
   if (state.selectedUser === "") {
     state.selectedUser = null;
     elements.bookmarkAdd.style.display = "none";
-    state.bookmarks = [];
-    render();
+    showMessage("Please select a user to view bookmarks.");
+    state.bookmarks = null;
     return;
   }
 
@@ -64,10 +63,58 @@ function handleUserSelection(event) {
 // Render bookmarks in the container
 function render() {
   if (state.bookmarks === null) {
-    elements.bookmarkContainer.textContent =
-      "There is currently no stored bookmark data for this user.";
+    showMessage("There is currently no stored bookmark data for this user.");
   } else {
+    state.bookmarks = sortBookmarks(state.bookmarks);
+    const cards = state.bookmarks.map(createBookmarkCard);
+    elements.bookmarkContainer.replaceChildren(...cards);
   }
+}
+// Create bookmark card
+function createBookmarkCard(bookmark) {
+  const article = document.createElement("article");
+  const title = document.createElement("h3");
+  const link = document.createElement("a");
+  link.href = bookmark.url;
+  link.textContent = bookmark.title;
+  link.target = "_blank";
+  //link.rel = "noopener noreferrer";
+  title.appendChild(link);
+  // Description
+  const description = document.createElement("p");
+  description.textContent = bookmark.description;
+  // Created date
+  const createdAt = document.createElement("p");
+  createdAt.textContent = `Created: ${new Date(
+    bookmark.createdAt,
+  ).toLocaleString()}`;
+  // Copy button
+  const copyButton = document.createElement("button");
+  copyButton.textContent = "Copy to clipboard";
+  copyButton.addEventListener("click", async () => {
+    await navigator.clipboard.writeText(bookmark.url);
+    copyButton.textContent = "Copied!";
+  });
+  // Like button
+  const likeButton = document.createElement("button");
+  likeButton.id = "like_button";
+  likeButton.textContent = `Like (${bookmark.likes || 0})`;
+  likeButton.addEventListener("click", () => handleAddLike(bookmark));
+  // Add everything to the article
+  article.appendChild(title);
+  article.appendChild(description);
+  article.appendChild(createdAt);
+  article.appendChild(copyButton);
+  article.appendChild(likeButton);
+  return article;
+}
+
+function handleAddLike(bookmark) {
+  increaseLikes(bookmark);
+  setData(state.selectedUser, state.bookmarks);
+  document.getElementById("like_button").textContent =
+    `Like (${bookmark.likes})`;
+  render();
 }
 
 // Handle bookmark form
@@ -87,4 +134,8 @@ function handleAddBookmarkSubmit(event) {
   setData(state.selectedUser, state.bookmarks);
   elements.bookmarkForm.reset();
   render();
+}
+
+function showMessage(text) {
+  elements.bookmarkContainer.textContent = text;
 }
