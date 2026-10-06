@@ -4,20 +4,23 @@
 
 body {
   font-family: Arial, sans-serif;
-  max-width: 900px;
+  max-width: 950px;
   margin: 0 auto;
-  padding: 30px 20px;
-  background-color: #f5f7fa;
+  padding: 40px 20px;
+  background-color: #f1f5f3;
   color: #333;
+  line-height: 1.5;
 }
 
 /* Main heading */
 h1 {
   text-align: center;
-  margin-bottom: 35px;
+  margin: 0 0 35px;
   color: #016937;
+  font-size: 2.2rem;
 }
 
+/* Main sections */
 section {
   background-color: white;
   padding: 25px;
@@ -29,11 +32,11 @@ section {
 
 /* Section headings */
 h2 {
-  margin-top: 0;
-  margin-bottom: 20px;
-  color: #016937;
-  border-bottom: 2px solid #eee;
+  margin: 0 0 20px;
   padding-bottom: 10px;
+  color: #016937;
+  border-bottom: 2px solid #e9eeee;
+  font-size: 1.4rem;
 }
 
 /* Labels */
@@ -44,21 +47,33 @@ label {
   color: #016937;
 }
 
-/* Select input and textarea */
+/* Select, input and textarea */
 select,
 input,
 textarea {
   width: 100%;
   padding: 12px;
   margin-bottom: 18px;
-  border: 1px solid #c2af01;
+  border: 1px solid #c9d2d0;
   border-radius: 7px;
+  font-family: inherit;
   font-size: 15px;
-  background-color: #fff;
+  background-color: white;
+  color: #333;
 }
 
+/* Input focus */
+select:focus,
+input:focus,
+textarea:focus {
+  outline: 2px solid #8bc9ad;
+  border-color: #016937;
+}
+
+/* Textarea */
 textarea {
   min-height: 120px;
+  resize: vertical;
 }
 
 /* Buttons */
@@ -66,8 +81,9 @@ button {
   padding: 11px 18px;
   border: none;
   border-radius: 7px;
-  background-color: #333;
+  background-color: #016937;
   color: white;
+  font-family: inherit;
   font-size: 15px;
   cursor: pointer;
 }
@@ -76,31 +92,78 @@ button:hover {
   background-color: #04975e;
 }
 
+button:focus {
+  outline: 2px solid #8bc9ad;
+  outline-offset: 2px;
+}
+
 /* Bookmarks area */
 #bookmarks-container {
   min-height: 100px;
 }
 
-/* Placeholder message */
-#message {
-  text-align: center;
-  font-style: italic;
-  color: #777;
-  padding: 30px 10px;
-  margin: 0;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-}
-
+/* Individual bookmark cards */
 article {
-border: 1px solid #E1E5EA;
-border-radius: 12px;
-padding: 20px;
-margin-bottom: 15px;
-background: white;
-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  margin-bottom: 15px;
+  border: 1px solid #e1e5ea;
+  border-radius: 10px;
+  background-color: #fafcfc;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
+article:last-child {
+  margin-bottom: 0;
+}
+
+/* Bookmark title */
+article h3 {
+  margin: 0 0 10px;
+  font-size: 1.15rem;
+}
+
+article h3 a {
+  color: #016937;
+  text-decoration: none;
+}
+
+article h3 a:hover {
+  text-decoration: underline;
+}
+
+/* Bookmark information */
+article p {
+  margin: 8px 0;
+}
+
+article p:last-of-type {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Bookmark buttons */
 article button {
-margin-right: 10px;
+  margin-top: 12px;
+  margin-right: 8px;
+}
+
+/* Responsive layout */
+@media (max-width: 600px) {
+  body {
+    padding: 25px 15px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  section {
+    padding: 20px;
+  }
+
+  article button {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
 }

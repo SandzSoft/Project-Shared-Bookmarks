@@ -5,7 +5,7 @@ import { increaseLikes, getUserOptions, sortBookmarks } from "./functions.js";
 const state = {
   users: [],
   selectedUser: null,
-  bookmarks: [],
+  bookmarks: null,
 };
 
 const elements = {};
@@ -49,9 +49,9 @@ function handleUserSelection(event) {
   state.selectedUser = event.target.value;
   if (state.selectedUser === "") {
     state.selectedUser = null;
+    state.bookmarks = null;
     elements.bookmarkAdd.style.display = "none";
     showMessage("Please select a user to view bookmarks.");
-    state.bookmarks = null;
     return;
   }
 
@@ -62,13 +62,14 @@ function handleUserSelection(event) {
 
 // Render bookmarks in the container
 function render() {
+  elements.bookmarkContainer.replaceChildren();
   if (state.bookmarks === null) {
     showMessage("There is currently no stored bookmark data for this user.");
-  } else {
-    state.bookmarks = sortBookmarks(state.bookmarks);
-    const cards = state.bookmarks.map(createBookmarkCard);
-    elements.bookmarkContainer.replaceChildren(...cards);
+    return;
   }
+  state.bookmarks = sortBookmarks(state.bookmarks);
+  const cards = state.bookmarks.map(createBookmarkCard);
+  elements.bookmarkContainer.replaceChildren(...cards);
 }
 // Create bookmark card
 function createBookmarkCard(bookmark) {
@@ -78,7 +79,7 @@ function createBookmarkCard(bookmark) {
   link.href = bookmark.url;
   link.textContent = bookmark.title;
   link.target = "_blank";
-  //link.rel = "noopener noreferrer";
+  link.rel = "noopener noreferrer";
   title.appendChild(link);
   // Description
   const description = document.createElement("p");
@@ -97,7 +98,6 @@ function createBookmarkCard(bookmark) {
   });
   // Like button
   const likeButton = document.createElement("button");
-  likeButton.id = "like_button";
   likeButton.textContent = `Like (${bookmark.likes || 0})`;
   likeButton.addEventListener("click", () => handleAddLike(bookmark));
   // Add everything to the article
@@ -112,8 +112,6 @@ function createBookmarkCard(bookmark) {
 function handleAddLike(bookmark) {
   increaseLikes(bookmark);
   setData(state.selectedUser, state.bookmarks);
-  document.getElementById("like_button").textContent =
-    `Like (${bookmark.likes})`;
   render();
 }
 
