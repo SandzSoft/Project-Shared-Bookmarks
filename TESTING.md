@@ -34,7 +34,7 @@ Manually tested by clicking the "Copy to clipboard" button and pasting the copie
 
 Manually tested by clicking the Like button on different bookmarks and confirming that each bookmark's like count changes independently.
 
-## The page was then refreshed and the like counts were checked to confirm that the updated values persisted.
+The page was then refreshed and the like counts were checked to confirm that the updated values persisted.
 
 Unit test in `example.test.js` verifies that `increaseLikes()` correctly increases a bookmark's like count.
 
