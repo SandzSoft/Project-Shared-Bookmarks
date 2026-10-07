@@ -16,7 +16,6 @@ window.onload = function () {
   elements.bookmarkContainer = document.getElementById("bookmarks-container");
   elements.bookmarkForm = document.getElementById("bookmark-form");
   elements.bookmarkAdd = document.getElementById("add-bookmark");
-  //elements.bookmarkClear = document.getElementById("bookmark-clear");
 
   elements.bookmarkTitle = document.getElementById("title");
   elements.bookmarkUrl = document.getElementById("url");
@@ -27,7 +26,6 @@ window.onload = function () {
   createUserOptions();
   elements.userSelect.addEventListener("change", handleUserSelection);
   elements.bookmarkForm.addEventListener("submit", handleAddBookmarkSubmit);
-  //elements.bookmarkClear.addEventListener("click", handleClearBookmark);
 };
 
 // Create user options in the select dropdown
