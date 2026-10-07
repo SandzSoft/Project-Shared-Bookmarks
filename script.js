@@ -61,7 +61,7 @@ function handleUserSelection(event) {
 // Render bookmarks in the container
 function render() {
   elements.bookmarkContainer.replaceChildren();
-  if (state.bookmarks === null) {
+  if (!state.bookmarks || state.bookmarks.length === 0) {
     showMessage("There is currently no stored bookmark data for this user.");
     return;
   }
